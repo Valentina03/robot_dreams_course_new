@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Getter and Setter tests">
+    <test name="Person">
+        <groups>
+            <run>
+                <include name="setters"></include>
+                <include name="getters"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="TestMan"></class>
+            <class name="TestWoman"></class>
+        </classes>
+    </test>
+</suite>
