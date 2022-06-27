@@ -11,19 +11,20 @@ public abstract class Person {
         setLastName(lastName);
         setAge(age);
         this.partner = partner;
-        this.pet = pet;
+        setPet(pet);
     }
 
     public Person(String firstName, String lastName, int age, boolean pet) {
         setFirstName(firstName);
         setLastName(lastName);
         setAge(age);
-        this.pet = pet;
+        setPet(pet);
     }
 
     public void setFirstName(String firstName) {
         if (firstName.isEmpty()) {
             System.out.println("Empty firstName");
+            throw new IllegalArgumentException("Empty firstName");
         } else {
             this.firstName = firstName;
         }
@@ -36,6 +37,7 @@ public abstract class Person {
     public void setLastName(String lastName) {
         if (lastName.isEmpty()) {
             System.out.println("Empty lastName");
+            throw new IllegalArgumentException("Empty lastName");
         } else {
             this.lastName = lastName;
         }
@@ -50,13 +52,23 @@ public abstract class Person {
     }
 
     public void setAge(int age) {
-        if (age > 1 && age < 120) {
+        if (age >= 1 && age <= 120) {
             this.age = age;
-        } else
+        } else {
             System.out.printf("Incorrect age - %s %n", age);
+            throw new IllegalArgumentException("Empty age");
+        }
     }
 
-    public abstract void isRetired();
+    public boolean isPet() {
+        return pet;
+    }
+
+    public void setPet(boolean pet) {
+        this.pet = pet;
+    }
+
+    public abstract boolean isRetired();
 
     public boolean isHasPartner() {
         return partner != null;

@@ -9,9 +9,11 @@ public class Man extends Person {
     }
 
     @Override
-    public void isRetired() {
+    public boolean isRetired() {
         if (getAge() >= 65) {
             System.out.printf("%s retired %n", getLastName());
+            return true;
         }
+        return false;
     }
 }

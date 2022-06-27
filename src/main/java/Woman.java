@@ -11,10 +11,12 @@ public class Woman extends Person {
     }
 
     @Override
-    public void isRetired() {
+    public boolean isRetired() {
         if (getAge() >= 60) {
             System.out.printf("%s retired %n", getLastName());
+            return true;
         }
+        return false;
     }
 
     @Override
