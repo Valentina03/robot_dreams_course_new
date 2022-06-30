@@ -15,31 +15,29 @@ public class TestWoman {
         assert this.hasPet == woman.hasPet();
     }
 
-    @Test(dataProvider = "names test data",dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "invalid name test data",dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
     public void testCreateWithEmptyFirstName(String firstName){
         new Woman(firstName, this.lastName, this.age, this.hasPet);
     }
 
-    @Test(dataProvider = "names test data",dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "invalid name test data",dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
     public void testCreateWithEmptyLastName(String lastName){
         new Woman(this.firstName, lastName, this.age, this.hasPet);
     }
 
-    @Test(dataProvider = "age test data", dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "invalid age test data", dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
     public void testCreateWithIncorrectAge(int age){
         new Woman(this.firstName, this.lastName, age, this.hasPet);
     }
 
-    @Test()
-    public void testIsRetired(){
-        int age = 96;
+    @Test(dataProvider = "age for retired woman test data", dataProviderClass = DataProvidersTest.class)
+    public void testIsRetired(int age){
         Woman woman = new Woman(this.firstName, this.lastName, age, this.hasPet);
         assert woman.isRetired();
     }
 
-    @Test(priority = 1)
-    public void testIsNotRetired(){
-        int age = 18;
+    @Test(dataProvider = "invalid age for retired woman test data", dataProviderClass = DataProvidersTest.class, priority = 1)
+    public void testIsNotRetired(int age){
         Woman woman = new Woman(this.firstName, this.lastName, age, this.hasPet);
         assert !woman.isRetired();
     }

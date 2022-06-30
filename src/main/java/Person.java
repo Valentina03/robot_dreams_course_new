@@ -22,7 +22,6 @@ public abstract class Person {
     }
 
     public void setFirstName(String firstName) {
-
         if (firstName == null || firstName.trim().isEmpty()) {
             System.out.println("Empty firstName");
             throw new IllegalArgumentException("Empty firstName");
