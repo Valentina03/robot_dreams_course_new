@@ -3,56 +3,50 @@ import org.testng.annotations.Test;
 public class TestWoman {
     String firstName = "Ray";
     String lastName = "Dlomova";
-    boolean isPet = false;
+    boolean hasPet = false;
     int age = 35;
 
     @Test(groups = {"setters","getters"})
     public void testCreate(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         assert this.firstName.equals(woman.getFirstName());
         assert this.lastName.equals(woman.getLastName());
         assert this.age == woman.getAge();
-        assert this.isPet == woman.isPet();
+        assert this.hasPet == woman.hasPet();
     }
 
-    @Test(groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
-    public void testCreateWithEmptyFirstName(){
-        String firstName = "";
-        Woman woman = new Woman(firstName, this.lastName, this.age, this.isPet);
-        assert woman.getFirstName() == null;
+    @Test(dataProvider = "names test data",dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
+    public void testCreateWithEmptyFirstName(String firstName){
+        new Woman(firstName, this.lastName, this.age, this.hasPet);
     }
 
-    @Test(groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
-    public void testCreateWithEmptyLastName(){
-        String lastName = "";
-        Woman woman = new Woman(this.firstName, lastName, this.age, this.isPet);
-        assert woman.getLastName() == null;
+    @Test(dataProvider = "names test data",dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
+    public void testCreateWithEmptyLastName(String lastName){
+        new Woman(this.firstName, lastName, this.age, this.hasPet);
     }
 
-    @Test(groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
-    public void testCreateWithIncorrectAge(){
-        int age = 0;
-        Woman woman = new Woman(this.firstName, this.lastName, age, this.isPet);
-        assert woman.getAge() <= 0;
+    @Test(dataProvider = "age test data", dataProviderClass = DataProvidersTest.class, groups = {"setters"}, priority = 1, expectedExceptions = IllegalArgumentException.class)
+    public void testCreateWithIncorrectAge(int age){
+        new Woman(this.firstName, this.lastName, age, this.hasPet);
     }
 
     @Test()
     public void testIsRetired(){
         int age = 96;
-        Woman woman = new Woman(this.firstName, this.lastName, age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, age, this.hasPet);
         assert woman.isRetired();
     }
 
     @Test(priority = 1)
     public void testIsNotRetired(){
         int age = 18;
-        Woman woman = new Woman(this.firstName, this.lastName, age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, age, this.hasPet);
         assert !woman.isRetired();
     }
 
     @Test()
     public void testRegisterPartnership(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man = new Man("Ban","Coll",61, false);
         assert woman.registerPartnership(man);
         assert woman.isHasPartner();
@@ -61,7 +55,7 @@ public class TestWoman {
     @Test()
     public void testChangeLastName(){
         String lastName = "Coll";
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man = new Man("Ban",lastName,61, false);
         woman.registerPartnership(man);
         assert lastName.equals(woman.getLastName());
@@ -69,7 +63,7 @@ public class TestWoman {
 
     @Test(priority = 1)
     public void testNotPossibleRegisterPartnershipTwiceSamePersons(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man = new Man("Ban","Coll",61, false);
         woman.registerPartnership(man);
         assert !woman.registerPartnership(man);
@@ -77,7 +71,7 @@ public class TestWoman {
 
     @Test(priority = 1)
     public void testNotPossibleRegisterPartnershipPerPersonWithPartner(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man1 = new Man("Ban","Coll",61, false);
         Man man2 = new Man("Rad","Boll",19, false);
         woman.registerPartnership(man1);
@@ -86,7 +80,7 @@ public class TestWoman {
 
     @Test()
     public void testDeregisterPartnership(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man = new Man("Ban","Coll",61, false);
         woman.registerPartnership(man);
         assert woman.deregisterPartnership(man);
@@ -95,7 +89,7 @@ public class TestWoman {
 
     @Test()
     public void testReturnLastName(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man = new Man("Ban","Coll",61, false);
         woman.registerPartnership(man);
         woman.deregisterPartnership(man);
@@ -104,7 +98,7 @@ public class TestWoman {
 
     @Test(priority = 1)
     public void testNotPossibleDeregisterPartnershipTwiceSamePersons(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man = new Man("Ban","Coll",61, false);
         woman.registerPartnership(man);
         woman.deregisterPartnership(man);
@@ -113,7 +107,7 @@ public class TestWoman {
 
     @Test(priority = 1)
     public void testNotPossibleDeregisterPartnershipSinglePersons(){
-        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.isPet);
+        Woman woman = new Woman(this.firstName, this.lastName, this.age, this.hasPet);
         Man man = new Man("Ban","Coll",61, false);
         assert !woman.deregisterPartnership(woman);
     }

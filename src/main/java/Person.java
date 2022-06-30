@@ -22,7 +22,8 @@ public abstract class Person {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName.isEmpty()) {
+
+        if (firstName == null || firstName.trim().isEmpty()) {
             System.out.println("Empty firstName");
             throw new IllegalArgumentException("Empty firstName");
         } else {
@@ -35,7 +36,7 @@ public abstract class Person {
     }
 
     public void setLastName(String lastName) {
-        if (lastName.isEmpty()) {
+        if (lastName == null || lastName.trim().isEmpty()) {
             System.out.println("Empty lastName");
             throw new IllegalArgumentException("Empty lastName");
         } else {
@@ -60,7 +61,7 @@ public abstract class Person {
         }
     }
 
-    public boolean isPet() {
+    public boolean hasPet() {
         return pet;
     }
 
