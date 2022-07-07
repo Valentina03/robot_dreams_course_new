@@ -110,4 +110,24 @@ public abstract class Person {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        if (partner == null){
+            return "{" +
+                    "firstName='" + firstName + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    ", age=" + age +
+                    ", Not partner" +
+                    '}';
+        } else {
+            return "{" +
+                    "firstName='" + firstName + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    ", age=" + age +
+                    ", partner=" + partner.getFirstName() + " " + partner.getLastName() +
+                    '}';
+        }
+
+    }
 }
