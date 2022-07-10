@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BDTest extends BaseTest{
+public class DBTest extends BaseTest{
 
     @Test
     public void checkConnectToDBTest() throws SQLException {
@@ -15,21 +15,16 @@ public class BDTest extends BaseTest{
 
     @Test
     public void addNewCustomerTest() throws SQLException {
-        String sqlPattern = "INSERT INTO сustomers VALUES (3,?,?,?,?,?,?)";
+        String sqlPattern = "INSERT INTO сustomers VALUES (3,'Ira','Bancova','05066585','test3@gmail.com','Some address3','36065')";
         PreparedStatement statement = getConnect().prepareStatement(sqlPattern);
-        statement.setString(1,"Ira");
-        statement.setString(2,"Bancova");
-        statement.setString(3,"05066585");
-        statement.setString(4,"test3@gmail.com");
-        statement.setString(5,"Some address3");
-        statement.setString(6,"36065");
         ResultSet resultSet = statement.executeQuery();
     }
 
     @Test
-    public void getOrderTest() throws SQLException {
-        String sqlPattern = "SELECT * FROM orders WHERE product_id=3";
+    public void getCustomerTest() throws SQLException {
+        String sqlPattern = "SELECT * FROM сustomers WHERE first_name=?";
         PreparedStatement statement = getConnect().prepareStatement(sqlPattern);
+        statement.setString(1, "Ira");
         ResultSet resultSet = statement.executeQuery();
     }
 
@@ -45,7 +40,7 @@ public class BDTest extends BaseTest{
     public void deleteCustomerTest() throws SQLException {
         String sqlPattern = "DELETE FROM customers Where email=?";
         PreparedStatement statement = getConnect().prepareStatement(sqlPattern);
-        statement.setString(1, "test@gmail.com");
+        statement.setString(1, "test3@gmail.com");
         ResultSet resultSet = statement.executeQuery();
     }
 }
