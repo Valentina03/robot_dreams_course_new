@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-public class ButtonsPage {
+public class ButtonsPageTest {
     private WebDriver driver;
 
     @BeforeClass
